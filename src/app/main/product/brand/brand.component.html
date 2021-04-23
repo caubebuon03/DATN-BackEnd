@@ -1,0 +1,131 @@
+<div style="overflow-x:hidden;">
+    <div class="breadcrumbs" id="breadcrumbs">
+      <ul class="breadcrumb">
+        <li>
+          <i class="ace-icon fa fa-home home-icon"></i>
+          <a href="#">Trang chủ</a>
+        </li>
+        <li class="active">Quản lý thương hiệu</li>
+      </ul>
+      <div class="nav-search">
+        <p class="pull-right no-margin">
+          <a (click)="createModal()" class="btn btn-success btn-xs">
+            <i class="fa fa-plus"></i>&nbsp;Thêm
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+    
+      <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <p-panel header="Tìm kiếm" [style]="{'margin-top': '2px'}">
+          <form class="form-horizontal"  [formGroup]="formsearch"  (ngSubmit)="search()">
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right">Tên thương hiệu</label>
+              <div class="col-sm-10">
+                <input formControlName="brand_name"  type="text" placeholder="Tên thương hiệu" />
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-2 control-label no-padding-right"></label>
+              <div class="col-sm-10">
+                <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
+              </div>
+            </div>
+          </form> 
+        </p-panel>
+        <p-table selectionMode="single" [value]="brands" styleClass="p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 70px; text-align: center;">STT</th>
+              <th style="width: 15%; text-align: left;">Tên thương hiệu</th>
+              <th style="width: 15%; text-align: left;">Mô tả</th>
+            
+              
+              <th style="width: 120px; text-align: left;">Tác vụ</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item  let-i="rowIndex">
+            <tr>
+              <td style="width: 100px; text-align: center;">{{ i + 1 }}</td>
+              <td>{{ item.brand_name }}</td>
+              <td>{{ item.brand_desc }}</td>
+              
+              <td class="action-col" >
+                <div class="btn-group">
+                  <button title="" class="btn btn-xs btn-white btn-default"  (click)="openUpdateModal(item)">  
+                    <i class="ace-icon fa fa-edit"></i>
+                  </button>
+                  <button title="" class="btn btn-xs btn-white btn-default" (click)="onDelete(item)">
+                    <i class="ace-icon fa fa-trash"></i>
+                  </button>
+                </div>  
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <!-- PAGE CONTENT ENDS -->
+      </div>
+      <div class="col-xs-12" style="text-align: right;">
+        <ngb-pagination [collectionSize]="totalRecords" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div *ngIf="showUpdateModal" id="createUserModal" class="modal fade">
+        <div class="modal-dialog modal-lg full-height-modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4  *ngIf="isCreate" class="modal-title">Nhập thông tin thương hiệu </h4>
+              <h4 *ngIf="!isCreate" class="modal-title">Sửa thông tin thương hiệu</h4>
+            </div>
+            <form *ngIf="doneSetupForm" [formGroup]="formdata"  (ngSubmit)="onSubmit(formdata.value)" class="form-horizontal utehy-form">
+              <div class="modal-body no-padding">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label no-padding-right"> Tên thương hiệu</label>
+                  <div class="col-sm-10">
+                    <input type="text" placeholder="Tên thương hiệu" formControlName="brand_name"/>
+                    
+                      
+                    </div>
+                  </div>
+                </div>
+
+    
+                <div class="form-group">
+                  <label class="col-sm-2 control-label no-padding-right"> Mô tả</label>
+                  <div class="col-sm-10">
+                    <input type="text" formControlName="brand_desc" placeholder="Mô tả" />
+                  </div>
+                </div>
+    
+                <div class="form-group">
+                  <label class="col-sm-2 control-label no-padding-right"> URL</label>
+                  <div class="col-sm-10">
+                    <input type="text" formControlName="url" placeholder="Nội dung" />
+                  </div>
+                </div>
+
+    
+               
+               
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default btn-sm" (click)="Reset()">
+                <i class="fa fa-bell"></i> Làm mới
+              </button>
+              <button type="submit" class="btn btn-success btn-sm btn-submit">
+                <i class="fa fa-save"></i> Đồng ý
+              </button>
+              <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">
+                <i class="fa fa-times"></i> Đóng lại
+              </button>
+            </div>
+          </form>  
+          </div>
+        </div>
+      </div>
+    </div>
+     
