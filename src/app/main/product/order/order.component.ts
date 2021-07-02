@@ -14,6 +14,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
   danhsachtrangthai: any;
   public orders: any;
   public order: any;
+  public order2: any;
   public totalRecords: any;
   public pageSize = 3;
   public page = 1;
@@ -107,7 +108,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
     });
   }
   xemLichSuDonHang(item) {
-    this.order=item;
+    this.order2=item;
    setTimeout(() => {
     $('#lichSuDonHang').modal('toggle');
    }, );

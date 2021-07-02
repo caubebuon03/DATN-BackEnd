@@ -88,7 +88,7 @@
   <!-- /.row -->
 </div>
 
-<div *ngIf="order" id="lichSuDonHang" class="modal fade">
+ <div *ngIf="order2" id="lichSuDonHang" class="modal fade">
   <div class="modal-dialog modal-lg full-height-modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -97,10 +97,10 @@
       <div class="modal-body">
         <h5>Trạng thái hiện tại:
           <span class="text-success font-weight-bold">
-            <label>{{order.trangThai.trangthai}}</label>
+            <label>{{order2.trangThai.trangthai}}</label>
           </span>
         </h5>
-        <div [innerHTML]="order.audittrail"></div>
+        <div [innerHTML]="order2.audittrail"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" (click)="closeModal2()">
